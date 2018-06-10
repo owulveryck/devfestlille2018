@@ -11,17 +11,20 @@
  * GLOBAL STYLES
  *********************************************/
 body {
-  background-image: url("./images/octo.png");
-  background-position: bottom right;
+  /*background-image: url("./images/octo_dark.png");*/
+  background-image: url("./images/1520597838493.png");
+  background-size: 10%;
+  background-position: bottom left;
   background-repeat: no-repeat;
-  background-size: contain;
-  background-color: #fff; }
+  /*background-size: contain;*/
+  background-color: #101e3a; }
 
 .reveal {
-  font-family: "Lato", sans-serif;
-  font-size: 36px;
+  /*font-family: "Lato", sans-serif;*/
+  font-family: "glass_tty_vt220medium", sans-serif;
+  font-size: 46px;
   font-weight: normal;
-  color: #000; }
+  color: #b3e2ef; }
 
 ::selection {
   color: #fff;
@@ -43,8 +46,8 @@ body {
 .reveal h5,
 .reveal h6 {
   margin: 0 0 50px 0;
-  color: #000;
-  font-family: "News Cycle", Impact, sans-serif;
+  /*color: green;
+  font-family: "News Cycle", Impact, sans-serif;*/
   font-weight: normal;
   line-height: 1.2;
   letter-spacing: normal;
