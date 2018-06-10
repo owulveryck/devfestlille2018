@@ -21,6 +21,7 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
+                <link as=script href=/js/app.e436e971.js rel=preload><link as=script href=/js/vendors~app.15cc888a.js rel=preload><link href=/css/app.462da346.css rel=stylesheet>
 	</head>
 	<body>
 		<div class="reveal">
@@ -64,30 +65,8 @@
                                   NOT TO PLAY.
                                   </p>
                                 </section>
-                                <section>
-                                            <table>
-						<tbody>
-							<tr>
-								<td id="ttt0">X</td>
-								<td id="ttt1">X</td>
-								<td id="ttt2">X</td>
-							</tr>
-							<tr>
-								<td id="ttt3">X</td>
-								<td id="ttt4">X</td>
-								<td id="ttt5">X</td>
-							</tr>
-							<tr>
-								<td id="ttt6">X</td>
-								<td id="ttt7">X</td>
-								<td id="ttt8">X</td>
-							</tr>
-                                                        <tr>
-                                                        </tr>
-						</tbody>
-					</table>
-
-                                        <button onClick="run();" id="runButton" disabled>Run</button>
+                                <section> 
+                                  <div id=app></div>
                                 </section>
 
 				<section>
@@ -102,29 +81,6 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
-                <script src="wasm_exec.js"></script>
-                <script>
-		if (!WebAssembly.instantiateStreaming) { // polyfill
-			WebAssembly.instantiateStreaming = async (resp, importObject) => {
-				const source = await (await resp).arrayBuffer();
-				return await WebAssembly.instantiate(source, importObject);
-			};
-		}
-
-		const go = new Go();
-		let mod, inst;
-		WebAssembly.instantiateStreaming(fetch("nnre.wasm"), go.importObject).then((result) => {
-			mod = result.module;
-			inst = result.instance;
-			document.getElementById("runButton").disabled = false;
-		});
-
-		async function run() {
-			console.clear();
-			await go.run(inst);
-			inst = await WebAssembly.instantiate(mod, go.importObject); // reset instance
-		}
-                </script>
 
 
 		<script>
@@ -142,5 +98,6 @@
 				]
 			});
 		</script>
+                <script type=text/javascript src=/js/vendors~app.15cc888a.js></script><script type=text/javascript src=/js/app.e436e971.js></script>
 	</body>
 </html>
