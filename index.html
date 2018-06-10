@@ -64,10 +64,35 @@
                                   NOT TO PLAY.
                                   </p>
                                 </section>
+                                <section>
+                                            <table>
+						<tbody>
+							<tr>
+								<td id="ttt0">X</td>
+								<td id="ttt1">X</td>
+								<td id="ttt2">X</td>
+							</tr>
+							<tr>
+								<td id="ttt3">X</td>
+								<td id="ttt4">X</td>
+								<td id="ttt5">X</td>
+							</tr>
+							<tr>
+								<td id="ttt6">X</td>
+								<td id="ttt7">X</td>
+								<td id="ttt8">X</td>
+							</tr>
+                                                        <tr>
+                                                        </tr>
+						</tbody>
+					</table>
+
+                                        <button onClick="run();" id="runButton" disabled>Run</button>
+                                </section>
 
 				<section>
                                   <h2>Thank you</h2>
-                                  <p>Olivier Wulveryck - @owulveryck</p>
+                                  <p>Olivier Wulveryck - <a href="https://twitter.com/owulveryck">@owulveryck</a></p>
                                   <!--
                                   <p><img src="images/octo_technology-880e99dc2723ec38cd5cb24a6680a574.png" alt="Octo Technology"></p>
                                   -->
@@ -77,6 +102,30 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
+                <script src="wasm_exec.js"></script>
+                <script>
+		if (!WebAssembly.instantiateStreaming) { // polyfill
+			WebAssembly.instantiateStreaming = async (resp, importObject) => {
+				const source = await (await resp).arrayBuffer();
+				return await WebAssembly.instantiate(source, importObject);
+			};
+		}
+
+		const go = new Go();
+		let mod, inst;
+		WebAssembly.instantiateStreaming(fetch("nnre.wasm"), go.importObject).then((result) => {
+			mod = result.module;
+			inst = result.instance;
+			document.getElementById("runButton").disabled = false;
+		});
+
+		async function run() {
+			console.clear();
+			await go.run(inst);
+			inst = await WebAssembly.instantiate(mod, go.importObject); // reset instance
+		}
+                </script>
+
 
 		<script>
 			// More info about config & dependencies:
